@@ -9,6 +9,13 @@ class Agenda extends Model
 {
     use HasFactory;
 
-    protected $table = 'agendas';
-    protected $fillable = ['nama_guru', 'mapel', 'materi', 'darijam', 'sampaijam', 'absensi', 'nama_kelas', 'metode', 'link_belajar', 'screenshot', 'keterangan'];
+    protected $guarded = ['id'];
+
+    public function agendaguru(){
+        return $this->belongsTo(Guru::class, 'guru_id', 'id');
+    }
+
+    public function agendakelas(){
+        return $this->belongsTo(Kelas::class, 'kelas_id', 'id');
+    }
 }

@@ -18,25 +18,25 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Nama Guru</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_guru" value="{{$data->nama_guru}}">
-                                @error('nama_guru')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input list="browsers" name="guru_id"  class="form-control" id="exampleInputEmail1">
+                                <datalist id="browsers">
+                                    @foreach($guru as $row)
+                                        <option value="{{$row->id}}">{{$row->nama_guru}}</option>
+                                    @endforeach
+                                </datalist>
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Mata Pelajaran</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="mapel" value="{{$data->mapel}}">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="mapel">
                                 @error('mapel')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Materi</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="materi" value="{{$data->materi}}">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="materi">
                                 @error('materi')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -47,7 +47,7 @@
                                 <div class="mb-3 col-5">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Dari Jam (Ke)</h6></label>
                                     <select class="form-select" aria-label="Default select example" name='darijam'>
-                                        <option selected>{{$data->darijam}}</option>
+                                        <option selected>Jam Ke</option>
                                         <option value="jam ke-1">Jam Ke-1</option>
                                         <option value="jam ke-2">Jam Ke-2</option>
                                         <option value="jam ke-3">Jam Ke-3</option>
@@ -70,7 +70,7 @@
                                 <div class="mb-3 col-5">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Sampai Jam (Ke)</h6></label>
                                     <select class="form-select" aria-label="Default select example" name='sampaijam'>
-                                        <option selected>{{$data->sampaijam}}</option>
+                                        <option selected>Jam Ke</option>
                                         <option value="jam ke-1">Jam Ke-1</option>
                                         <option value="jam ke-2">Jam Ke-2</option>
                                         <option value="jam ke-3">Jam Ke-3</option>
@@ -90,7 +90,7 @@
                             </div>                          
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Absensi</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="absensi" value="{{$data->absensi}}">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="absensi">
                                 @error('absensi')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -99,7 +99,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Nama Kelas</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_kelas" value="{{$data->nama_kelas}}">
+                                <select class="form-select" aria-label="Default select example" name='kelas_id'>
+                                    <option selected>Pilih Nama Kelas</option>
+                                @foreach ($kelas as $row)
+                                    <option value="{{$row->id}}">{{$row->nama_kelas}}</option>
+                                @endforeach
+                                </select>
                                 @error('nama_kelas')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -109,7 +114,7 @@
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Metode</h6></label>
                                 <select class="form-select" aria-label="Default select example" name='metode'>
-                                    <option selected>{{$data->metode}}</option>
+                                    <option selected>Pilih Metode</option>
                                     <option value="online">Online</option>
                                     <option value="offline">Offline</option>
                                 </select>
@@ -121,7 +126,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Link Pembelajaran</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="link_belajar" value="{{$data->link_belajar}}">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="link_belajar">
                                 @error('link_belajar')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -130,7 +135,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Screenshot</h6></label>
-                                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="screenshot" value="{{$data->screenshot}}">
+                                <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="screenshot">
                                 @error('screenshot')
                                     <div class="text-danger">
                                         {{ $message }}
@@ -139,7 +144,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Keterangan</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="keterangan" value="{{$data->keterangan}}">
+                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="keterangan">
                                 @error('keterangan')
                                     <div class="text-danger">
                                         {{ $message }}

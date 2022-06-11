@@ -8,7 +8,7 @@ use App\Models\Mapel;
 class MapelController extends Controller
 {
     public function index(){
-        $data = mapel::all();
+        $data = mapel::paginate(5);
         return view('mapel.mapelview', compact('data'));
     } 
 

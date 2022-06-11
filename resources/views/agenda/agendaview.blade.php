@@ -39,7 +39,7 @@
                     @php
                         $no = 1;
                     @endphp
-                    @foreach ($data as $row)
+                    @foreach ($data as $index=>$row)
                     <tr>
                         <td>
                         <div class="d-flex px-2 py-1 ms-2">
@@ -54,7 +54,7 @@
                             <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                             </div> --}}
                             <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">{{$row -> nama_guru}}</h6>
+                            <h6 class="mb-0 text-sm">{{$row->nama_guru}}</h6>
                             </div>
                         </div>
                         </td>
@@ -95,8 +95,8 @@
                         </td>
                         <td class="align-middle">
                         <div class="d-flex justify-content-evenly ">
-                            <a href="/editagenda/{{$row->id}}" class="btn btn-sm bg-gradient-warning">Edit</a>
-                            <a href="/deleteagenda/{{$row->id}}" class="btn btn-sm bg-gradient-danger ms-3">Delete</a>
+                            <a href="/editagenda/{{$row->id_agenda}}" class="btn btn-sm bg-gradient-warning">Edit</a>
+                            <a href="/deleteagenda/{{$row->id_agenda}}" class="btn btn-sm bg-gradient-danger ms-3">Delete</a>
                         </div>
                         </td>
                     </tr>

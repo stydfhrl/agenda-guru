@@ -18,14 +18,14 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Nama Guru</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_guru">
-                                @error('nama_guru')
-                                    <div class="text-danger">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input list="browsers" name="guru_id"  class="form-control" id="exampleInputEmail1">
+                                <datalist id="browsers">
+                                    @foreach($guru as $row)
+                                        <option value="{{$row->id}}">{{$row->nama_guru}}</option>
+                                    @endforeach
+                                </datalist>
                             </div>
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Mata Pelajaran</h6></label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="mapel">
                                 @error('mapel')
@@ -33,7 +33,7 @@
                                         {{ $message }}
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Materi</h6></label>
                                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="materi">
@@ -99,7 +99,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label"><h6>Nama Kelas</h6></label>
-                                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_kelas">
+                                <select class="form-select" aria-label="Default select example" name='kelas_id'>
+                                    <option selected>Pilih Nama Kelas</option>
+                                @foreach ($kelas as $row)
+                                    <option value="{{$row->id}}">{{$row->nama_kelas}}</option>
+                                @endforeach
+                                </select>
                                 @error('nama_kelas')
                                     <div class="text-danger">
                                         {{ $message }}

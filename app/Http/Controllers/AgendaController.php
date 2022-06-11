@@ -2,33 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Guru;
+use App\Models\Kelas;
+use App\Models\Mapel;
 use App\Models\Agenda;
+use Illuminate\Http\Request;
 
 class AgendaController extends Controller
 {
     public function index(){
-        $data = agenda::all();
-        return view('agenda.agendaview', compact('data'));
+        $data = agenda::select('agendas.*', 'gurus.*', 'kelas.*', 'mapels.*', 'agendas.id as id_agenda')
+        ->leftJoin('gurus', 'agendas.guru_id', 'gurus.id')
+        ->leftJoin('kelas', 'kelas.id', 'agendas.kelas_id')
+        ->leftJoin('mapels', 'mapels.id', 'gurus.mapel_id')->get();
+        return view('agenda.agendaview', [
+            'data' => $data
+        ]);
     }
 
     public function create(){
-        return view('agenda.addagenda');
+        $guru = Guru::all();
+        $kelas = Kelas::all();
+        $mapel = Mapel::all();
+        return view('agenda.addagenda',[
+            'guru' => $guru,
+            'kelas' => $kelas,
+            'mapel' => $mapel
+        ]);
     }
 
     public function store(Request $request){
         $this->validate($request, [
-            'nama_guru' => 'required',
-            'mapel' => 'required',
             'materi' => 'required',
             'darijam' => 'required',
             'sampaijam' => 'required',
-            'absensi' => 'required',
-            'nama_kelas' => 'required',
             'metode' => 'required',
-            'link_belajar' => 'required',
-            'screenshot' => 'required',
-            'keterangan' => 'required',
         ]);
         $data = agenda::create($request->all()); 
         if($request->hasFile('screenshot')){
@@ -41,7 +49,10 @@ class AgendaController extends Controller
 
     public function edit($id){
         $data = agenda::find($id);
-        return view('agenda.editagenda', compact('data'));
+        $guru = Guru::all();
+        $kelas = Kelas::all();
+        $mapel = Mapel::all();
+        return view('agenda.editagenda', compact('data', 'guru', 'kelas', 'mapel'));
     }
 
     public function update(Request $request, $id){

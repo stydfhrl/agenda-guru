@@ -16,10 +16,9 @@ return new class extends Migration
         Schema::create('gurus', function (Blueprint $table) {
             $table->id();
             $table->string('nama_guru');
+            $table->foreignId('user_id'); //ambil data dari tabel users (username & password)
             $table->bigInteger('nik');
-            $table->string('mapel');
-            $table->string('username');
-            $table->string('password');
+            $table->foreignId('mapel_id'); //ambil data dari tabel mapel
             $table->timestamps();
         });
     }

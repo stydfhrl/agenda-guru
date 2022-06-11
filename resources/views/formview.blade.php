@@ -41,14 +41,14 @@
                                 @csrf
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Nama Guru</h6></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_guru">
-                                    @error('nama_guru')
-                                        <div class="text-danger">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                                    <input list="browsers" name="guru_id"  class="form-control" id="exampleInputEmail1">
+                                    <datalist id="browsers">
+                                        @foreach($guru as $row)
+                                            <option value="{{$row->id}}">{{$row->nama_guru}}</option>
+                                        @endforeach
+                                    </datalist>
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Mata Pelajaran</h6></label>
                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="mapel">
                                     @error('mapel')
@@ -56,7 +56,7 @@
                                             {{ $message }}
                                         </div>
                                     @enderror
-                                </div>
+                                </div> --}}
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Materi</h6></label>
                                     <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="materi">
@@ -122,7 +122,12 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Nama Kelas</h6></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="nama_kelas">
+                                    <select class="form-select" aria-label="Default select example" name='kelas_id'>
+                                        <option selected>Pilih Nama Kelas</option>
+                                    @foreach ($kelas as $row)
+                                        <option value="{{$row->id}}">{{$row->nama_kelas}}</option>
+                                    @endforeach
+                                    </select>
                                     @error('nama_kelas')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -153,7 +158,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label"><h6>Screenshot</h6></label>
-                                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="screenshot">
+                                    <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="screenshot">
                                     @error('screenshot')
                                         <div class="text-danger">
                                             {{ $message }}
@@ -200,18 +205,19 @@
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Kelas</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Absensi</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Metode Belajar</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Link Pembelajaran</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2 text-center">Screenshot</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Link Pembelajaran</th>
+                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Screenshot</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Keterangan</th>
                             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Created at</th>
                             {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Action</th> --}}
+                            <th class="text-secondary opacity-7"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @php
                             $no = 1;
                         @endphp
-                        @foreach ($data as $row)
+                        @foreach ($data as $index=>$row)
                         <tr>
                             <td>
                             <div class="d-flex px-2 py-1 ms-2">
@@ -226,7 +232,7 @@
                                 <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
                                 </div> --}}
                                 <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm">{{$row -> nama_guru}}</h6>
+                                <h6 class="mb-0 text-sm">{{$row->nama_guru}}</h6>
                                 </div>
                             </div>
                             </td>
@@ -266,10 +272,10 @@
                             <span class="text-secondary text-xs font-weight-bold">{{$row -> created_at}}</span>
                             </td>
                             {{-- <td class="align-middle">
-                            <div class="d-flex justify-content-evenly ">
-                                <a href="/editagenda/{{$row->id}}" class="btn btn-sm bg-gradient-warning">Edit</a>
-                                <a href="/formdelete/{{$row->id}}" class="btn btn-sm bg-gradient-danger ms-3">Delete</a>
-                            </div>
+                                <div class="d-flex justify-content-evenly ">
+                                    <a href="/editagenda/{{$row->id_agenda}}" class="btn btn-sm bg-gradient-warning">Edit</a>
+                                    <a href="/deleteagenda/{{$row->id_agenda}}" class="btn btn-sm bg-gradient-danger ms-3">Delete</a>
+                                </div>
                             </td> --}}
                         </tr>
                         @endforeach

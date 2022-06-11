@@ -9,6 +9,9 @@ class Mapel extends Model
 {
     use HasFactory;
 
-    protected $table = 'mapels';
-    protected $fillable = ['mapel'];
+    protected $guarded = ['id'];
+
+    public function mapelguru(){
+        return $this->hasMany(Guru::class);
+    }
 }

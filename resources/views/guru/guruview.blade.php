@@ -30,7 +30,7 @@
                 @php
                   $no = 1;
                 @endphp
-                @foreach ($data as $row)
+                @foreach ($data as $index => $row)
                 <tr>
                   <td>
                     <div class="d-flex px-2 py-1 ms-2">
@@ -46,7 +46,7 @@
                       </div> --}}
                       <div class="d-flex flex-column justify-content-center">
                         <h6 class="mb-0 text-sm">{{$row -> nama_guru}}</h6>
-                        <p class="text-xs text-secondary mb-0">{{$row -> username}} / pass : {{$row -> password}}</p>
+                        <p class="text-xs text-secondary mb-0">{{$row->guruuser->email}}</p>
                       </div>
                     </div>
                   </td>
@@ -55,7 +55,7 @@
                   </td>
                   <td class="align-middle text-center text-sm">
                     {{-- <span class="badge badge-sm bg-gradient-success">Online</span> --}}
-                    <h6 class="mb-0 text-sm">{{$row -> mapel}}</h6>
+                    <h6 class="mb-0 text-sm">{{$row ->gurumapel->mapel}}</h6>
                   </td>
                   <td class="align-middle text-center">
                     <span class="text-secondary text-xs font-weight-bold">{{$row -> created_at}}</span>

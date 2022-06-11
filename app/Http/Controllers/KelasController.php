@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Guru;
 use App\Models\Kelas;
+use Illuminate\Http\Request;
 
 class KelasController extends Controller
 {
     public function index(){
-        $data = kelas::all();
+        $data = kelas::select('kelas.*', 'gurus.*', 'kelas.id as id_kelas')
+        ->leftJoin('gurus', 'kelas.guru_id', 'gurus.id')
+        ->paginate(5);
         return view('kelas.kelasview', compact('data'));
     }
 
     public function create(){
-        return view('kelas.addkelas');
+        $guru = Guru::all();
+        return view('kelas.addkelas',[
+            'guru' => $guru
+        ]);
     }
 
     public function store(Request $request){
         $this->validate($request, [
             'nama_kelas' => 'required',
-            'wali_kelas' => 'required',
         ]);
         kelas::create($request->all());   
         return redirect()->route('kelas');
@@ -27,7 +32,8 @@ class KelasController extends Controller
 
     public function edit($id){
         $data = kelas::find($id);
-        return view('kelas.editkelas', compact('data'));
+        $guru = Guru::all();
+        return view('kelas.editkelas', compact('data', 'guru'));
     }
 
     public function update(Request $request, $id){

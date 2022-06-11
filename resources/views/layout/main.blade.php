@@ -124,6 +124,11 @@
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
+              <a href="/register" class="nav-link text-white font-weight-bold px-0 me-3">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none">Register (Guru)</span>
+              </a>
+            <li class="nav-item d-flex align-items-center">
               <a href="/logout" class="nav-link text-white font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none">Sign Out</span>
